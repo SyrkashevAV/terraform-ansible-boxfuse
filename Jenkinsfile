@@ -6,15 +6,7 @@ pipeline {
     stages {
         stage("terraform init") {
             steps {
-                sh 'cd terraform'
                 sh 'terraform init'
-            }
-        }
-
-        stage("terraform plan") {
-            steps {
-                sh 'ls -la && pwd'
-                sh 'terraform plan'
             }
         }
 
