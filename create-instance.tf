@@ -1,3 +1,11 @@
+variable "yandex-token" {
+  default = yandex-token
+}
+
+variable "yandex-cloud-id" {
+  default = yandex-cloud-id
+}
+
 terraform {
   required_providers {
     yandex = {
@@ -8,8 +16,8 @@ terraform {
 }
 
 provider "yandex" {
-  token     = yandex-token
-  cloud_id  = yandex-cloud-id
+  token     = var.yandex-token
+  cloud_id  = var.yandex-cloud-id
   folder_id = yandex-folder-id
   zone      = yandex-zone
 }
