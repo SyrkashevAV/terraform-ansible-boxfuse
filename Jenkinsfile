@@ -13,7 +13,7 @@ pipeline {
 
         stage("terraform plan") {
             steps {
-                sh 'ls -la'
+                sh 'ls -la && pwd'
                 sh 'terraform plan'
             }
         }
