@@ -8,10 +8,10 @@ terraform {
 }
 
 provider "yandex" {
-  token     = var.yandex-token
-  cloud_id  = var.yandex-cloud-id
-  folder_id = var.yandex-folder-id
-  zone      = var.yandex-zone
+  token     = yandex-token
+  cloud_id  = yandex-cloud
+  folder_id = yandex-folder-id
+  zone      = yandex-zone
 }
 
 resource "yandex_vpc_network" "network" {
@@ -24,7 +24,7 @@ resource "yandex_vpc_network" "network" {
 
 resource "yandex_vpc_subnet" "subnet" {
   name = "subnet"
-  zone = var.yandex-zone
+  zone = yandex-zone
   network_id = yandex_vpc_network.network.id
   v4_cidr_blocks = ["10.0.0.0/24"]
 
@@ -69,7 +69,7 @@ resource "yandex_compute_instance" "build" {
 
 resource "yandex_container_registry" "registry" {
   name = "registry"
-  folder_id = var.yandex-folder-id
+  folder_id = yandex-folder-id
 }
 
 resource "yandex_container_registry_iam_binding" "user" {
