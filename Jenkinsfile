@@ -8,6 +8,7 @@ pipeline {
             steps{
                 sh 'rm -rf boxfuse-terraform/*'
                 git 'https://github.com/Misterro/boxfuse-terraform.git'
+                sh 'ls -la'
             }
         }
 
