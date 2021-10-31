@@ -1,5 +1,4 @@
 pipeline {
-
     agent {
         docker {
             image("hashicorp/terraform:0.15.0")
@@ -8,7 +7,9 @@ pipeline {
 
     stages {
         stage('checkout project') {
-            sh 'git clone https://github.com/Misterro/boxfuse-terraform.git && cd boxfuse-terraform/terraform'
+            steps{
+                sh 'git clone https://github.com/Misterro/boxfuse-terraform.git && cd boxfuse-terraform/terraform'
+            }
         }
 
         stage("terraform init") {
