@@ -6,13 +6,13 @@ pipeline {
     stages {
         stage("terraform init") {
             steps {
-                sh 'ls -la'
                 sh 'cd terraform && terraform init'
             }
         }
 
         stage("terraform plan") {
             steps {
+                sh 'ls -la'
                 sh 'terraform plan'
             }
         }
