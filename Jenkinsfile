@@ -9,13 +9,14 @@ pipeline {
     stages {
         stage('checkout project') {
             steps{
-                git 'clone https://github.com/Misterro/boxfuse-terraform.git'
+                sh 'rm -rf boxfuse-terraform/*'
+                git 'https://github.com/Misterro/boxfuse-terraform.git'
             }
         }
 
         stage("terraform init") {
             steps {
-                sh 'cd boxfuse-terraform/terraform terraform init'
+                sh 'cd boxfuse-terraform/terraform && terraform init'
             }
         }
 
