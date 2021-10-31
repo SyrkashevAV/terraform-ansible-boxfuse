@@ -4,17 +4,17 @@ pipeline {
     }
 
     stages {
-        stage('checkout project') {
-            steps{
-                sh 'rm -rf boxfuse-terraform/*'
-                git 'https://github.com/Misterro/boxfuse-terraform.git'
-            }
-        }
+//         stage('checkout project') {
+//             steps{
+// //                 sh 'rm -rf boxfuse-terraform/*'
+// //                 git 'https://github.com/Misterro/boxfuse-terraform.git'
+//             }
+//         }
 
         stage("terraform init") {
             steps {
                 sh 'ls -la'
-                sh 'cd boxfuse-terraform/terraform && terraform init'
+                sh 'cd terraform && terraform init'
             }
         }
 
