@@ -1,10 +1,10 @@
-variable "yandex-token" {
-  default = yandex-token
-}
+variable "yandex-token" {}
 
-variable "yandex-cloud-id" {
-  default = yandex-cloud-id
-}
+variable "yandex-cloud-id" {}
+
+variable "yandex-folder-id" {}
+
+variable "yandex-zone" {}
 
 terraform {
   required_providers {
@@ -18,8 +18,8 @@ terraform {
 provider "yandex" {
   token     = var.yandex-token
   cloud_id  = var.yandex-cloud-id
-  folder_id = yandex-folder-id
-  zone      = yandex-zone
+  folder_id = var.yandex-folder-id
+  zone      = var.yandex-zone
 }
 
 resource "yandex_vpc_network" "network" {
