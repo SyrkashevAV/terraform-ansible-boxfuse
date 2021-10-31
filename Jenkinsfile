@@ -9,20 +9,20 @@ pipeline {
     stages {
         stage('checkout project') {
             steps{
-                sh 'git clone https://github.com/Misterro/boxfuse-terraform.git && cd boxfuse-terraform/terraform'
+                sh 'ls -la'
             }
         }
 
-        stage("terraform init") {
-            steps {
-                sh 'terraform init'
-            }
-        }
-
-        stage("terraform apply") {
-            steps {
-                sh 'terraform apply -var yandex_token="${YANDEX_TOKEN}" -var yandex-cloud-id="${YANDEX_CLOUD_ID}" -var yandex-folder-id=${YANDEX_FOLDER_ID} -var yandex-zone=${YANDEX_ZONE}'
-            }
-        }
+//         stage("terraform init") {
+//             steps {
+//                 sh 'terraform init'
+//             }
+//         }
+//
+//         stage("terraform apply") {
+//             steps {
+//                 sh 'terraform apply -var yandex_token="${YANDEX_TOKEN}" -var yandex-cloud-id="${YANDEX_CLOUD_ID}" -var yandex-folder-id=${YANDEX_FOLDER_ID} -var yandex-zone=${YANDEX_ZONE}'
+//             }
+//         }
     }
 }
