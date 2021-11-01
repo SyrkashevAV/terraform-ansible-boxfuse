@@ -20,7 +20,7 @@ pipeline {
         }
         stage("ansible") {
             steps {
-                sh 'ansible -i inventory.yaml -m ping'
+                sh 'nano inventory.yaml'
             }
         }
     }
