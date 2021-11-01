@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage("terraform init") {
             steps {
+                sh 'pwd && ls -la'
                 sh 'cd terraform/'
                 sh 'rm -rf .terraform/* .terraform.lock.hcl terraform.tfstate'
                 sh 'terraform init'
