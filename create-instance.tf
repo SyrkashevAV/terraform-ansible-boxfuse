@@ -23,7 +23,7 @@ provider "yandex" {
 }
 
 resource "yandex_vpc_network" "network" {
-  name = "network"
+  name = "network1"
 
   labels = {
     environment = "network"
@@ -31,7 +31,7 @@ resource "yandex_vpc_network" "network" {
 }
 
 resource "yandex_vpc_subnet" "subnet" {
-  name = "subnet"
+  name = "subnet1"
   zone = var.yandex-zone
   network_id = yandex_vpc_network.network.id
   v4_cidr_blocks = ["10.0.0.0/24"]
@@ -73,20 +73,6 @@ resource "yandex_compute_instance" "build" {
       private_key = file("~/.ssh/id_rsa")
     }
   }
-}
-
-resource "yandex_container_registry" "registry" {
-  name = "registry"
-  folder_id = var.yandex-folder-id
-}
-
-resource "yandex_container_registry_iam_binding" "user" {
-  registry_id = yandex_container_registry.registry.id
-  role = "container-registry.images.pusher"
-
-  members = [
-    "userAccount:ajecrgtho5m706hs6ej0"
-  ]
 }
 
 resource "yandex_compute_instance" "prod" {
