@@ -27,7 +27,7 @@ pipeline {
         }
         stage("ansible") {
             steps {
-                dir('terraform/ansible/inventory') {
+                dir('terraform') {
                     sh 'sudo ls -la'
                     sh 'cat inventory.yaml'
                 }
