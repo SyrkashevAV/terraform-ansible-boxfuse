@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage("terraform init") {
             steps {
+                sh 'terraform'
                 sh 'rm -rf .terraform/* .terraform.lock.hcl terraform.tfstate'
                 sh 'terraform init'
             }
@@ -20,7 +21,7 @@ pipeline {
         }
         stage("ansible") {
             steps {
-                sh 'cat inventory.yaml'
+                sh 'cat ansible/inventory.yaml'
             }
         }
     }
