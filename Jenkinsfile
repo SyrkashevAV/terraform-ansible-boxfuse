@@ -9,7 +9,7 @@ pipeline {
         stage("terraform init") {
             steps {
                 git 'https://github.com/Misterro/boxfuse-terraform.git'
-                sh 'ls -la'
+                sh 'cd boxfuse-terraform && pwd && ls -la'
                 sh 'terraform init'
             }
         }
