@@ -3,5 +3,5 @@ resource "local_file" "ansible_inventory" {
     build_ip = yandex_compute_instance.build.network_interface[0].nat_ip_address,
     prod_ip  = yandex_compute_instance.prod.network_interface[0].nat_ip_address
   })
-  filename = "./inventory.yaml"
+  filename = "./../ansible/inventory/inventory.yaml"
 }
