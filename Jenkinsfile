@@ -29,9 +29,9 @@ pipeline {
         }
         stage("ansible") {
             steps {
-
-                sh 'pwd && ls -la'
-
+                dir('ansible') {
+                    sh 'cat inventory.yaml'
+                }
             }
         }
     }
