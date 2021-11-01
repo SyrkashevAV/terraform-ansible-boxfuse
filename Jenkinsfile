@@ -27,7 +27,8 @@ pipeline {
         }
         stage("ansible") {
             steps {
-                dir('ansible') {
+                dir('ansible/inventory') {
+                    sh 'ls -la'
                     sh 'cat inventory.yaml'
                 }
             }
