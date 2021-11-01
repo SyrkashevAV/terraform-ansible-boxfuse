@@ -64,7 +64,7 @@ resource "yandex_compute_instance" "build" {
   }
 
   provisioner "remote-exec" {
-    inline = ["echo connected!"]
+    inline = ["echo Connected!"]
 
     connection {
       host = self.network_interface[0].nat_ip_address
@@ -98,7 +98,7 @@ resource "yandex_compute_instance" "prod" {
   }
 
   provisioner "remote-exec" {
-    inline = ["Connected!"]
+    inline = ["echo Connected!"]
 
     connection {
       host = self.network_interface[0].nat_ip_address
