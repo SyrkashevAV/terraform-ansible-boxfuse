@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-            args '-v /home/jenkins/.ssh/:/root/.ssh/ -u root --no-cache'
+            args '-v /home/jenkins/.ssh/:/root/.ssh/ -u root'
         }
     }
 
