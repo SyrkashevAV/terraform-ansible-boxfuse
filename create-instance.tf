@@ -60,7 +60,7 @@ resource "yandex_compute_instance" "build" {
   }
 
   metadata = {
-    ssh-keys = "extor:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "extor:${file("/root/.ssh/id_rsa.pub")}"
   }
 
   provisioner "remote-exec" {
@@ -70,7 +70,7 @@ resource "yandex_compute_instance" "build" {
       host = self.network_interface[0].nat_ip_address
       type = "ssh"
       user = "ubuntu"
-      private_key = file("~/.ssh/id_rsa")
+      private_key = file("/root/.ssh/id_rsa")
     }
   }
 }
@@ -94,7 +94,7 @@ resource "yandex_compute_instance" "prod" {
   }
 
   metadata = {
-    ssh-keys = "extor:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "extor:${file("/root/.ssh/id_rsa.pub")}"
   }
 
   provisioner "remote-exec" {
@@ -104,7 +104,7 @@ resource "yandex_compute_instance" "prod" {
       host = self.network_interface[0].nat_ip_address
       type = "ssh"
       user = "ubuntu"
-      private_key = file("~/.ssh/id_rsa")
+      private_key = file("/root/.ssh/id_rsa")
     }
   }
 }
