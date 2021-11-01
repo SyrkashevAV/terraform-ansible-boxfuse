@@ -20,7 +20,7 @@ pipeline {
         }
         stage("ansible") {
             steps {
-                sh 'nano inventory.yaml'
+                sh 'cat inventory.yaml'
             }
         }
     }
