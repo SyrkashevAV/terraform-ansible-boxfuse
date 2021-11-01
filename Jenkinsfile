@@ -29,7 +29,7 @@ pipeline {
             steps {
                 dir('terraform') {
                     sh 'ls -la'
-                    sh 'cat inventory.yaml'
+                    sh 'cat ansible/inventory/inventory.yaml'
                 }
             }
         }
