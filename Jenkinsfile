@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-            args '-v /home/jenkins/.ssh/:/root/.ssh/ -u root'
+            args '-v /home/jenkins/.ssh/:/root/.ssh/ -v /var/run/docker.sock:/var/run/docker.sock -u root'
         }
     }
 
