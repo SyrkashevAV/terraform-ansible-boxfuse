@@ -13,7 +13,7 @@
 
 - name: pass multiple varibales to playbook
   debug:
-  msg: "Hi This Is {{ password_docker }}"
+    msg: "Hi This Is {{ password_docker }}"
 
 - name: Build docker image
   community.docker.docker_image:
