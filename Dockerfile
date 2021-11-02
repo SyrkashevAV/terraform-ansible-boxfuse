@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 RUN ls
 RUN apt update && apt install -y gnupg software-properties-common curl
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
