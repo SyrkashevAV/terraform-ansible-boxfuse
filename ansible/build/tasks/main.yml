@@ -14,7 +14,7 @@
 - name: auth dockerhub
   community.docker.docker_login:
     username: malyshevsa
-    password: {{ password_docker }}
+    password: ${{ password_docker }}
 
 - name: Build docker image
   community.docker.docker_image:
