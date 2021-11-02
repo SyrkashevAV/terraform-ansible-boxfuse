@@ -27,7 +27,7 @@ pipeline {
             steps {
                 dir('ansible') {
                     sh 'cat ./inventory/inventory.yaml'
-                    sh 'ansible all -i ./inventory/inventory.yaml -m ping -u ubuntu'
+                    sh 'ansible-playbook playbook.yaml -i ./inventory/inventory.yaml -u ubuntu --extra-vars "password_docker=${DOCKER_HUB_PASSWORD}"'
                 }
             }
         }

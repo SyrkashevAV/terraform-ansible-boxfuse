@@ -1,0 +1,7 @@
+- hosts: build
+  roles:
+    - build
+
+- hosts: prod
+  roles:
+    - prod
