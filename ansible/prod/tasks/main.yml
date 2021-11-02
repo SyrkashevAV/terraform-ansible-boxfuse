@@ -7,23 +7,23 @@
     update_cache: yes
     state: present
 
-#- name: Create a volume
-#  community.docker.docker_volume:
-#    name: volume
+- name: Create a volume
+  community.docker.docker_volume:
+    name: volume
 
-#- name: start conteiner build
-#  community.docker.docker_container:
-#    name: build
-#    state: started
-#    image: malyshevsa/build:latest
-#    volumes:
-#      - volume:/war
-#
-#- name: start conteiner run
-#  community.docker.docker_container:
-#    name: run
-#    state: started
-#    image: tomcat:9.0.20-jre8-alpine
-#    volumes:
-#      - volume:/usr/local/tomcat/webapps
-#    ports: 8084:8080
+- name: start conteiner build
+  community.docker.docker_container:
+    name: build
+    state: started
+    image: malyshevsa/build:latest
+    volumes:
+      - volume:/war
+
+- name: start conteiner run
+  community.docker.docker_container:
+    name: run
+    state: started
+    image: tomcat:9.0.20-jre8-alpine
+    volumes:
+      - volume:/usr/local/tomcat/webapps
+    ports: 8084:8080
