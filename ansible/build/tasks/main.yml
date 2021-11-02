@@ -15,11 +15,11 @@
   debug:
     msg: "Hi This Is {{ password_docker }}"
 
-- name: Build docker image
-  community.docker.docker_image:
-    build:
-      path: /tmp
-    name: war
-    repository: malyshevsa/build
-    push: yes
-    source: build
+#- name: Build docker image
+#  community.docker.docker_image:
+#    build:
+#      path: /tmp
+#    name: war
+#    repository: malyshevsa/build
+#    push: yes
+#    source: build
