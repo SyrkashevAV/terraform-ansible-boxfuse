@@ -27,7 +27,7 @@ pipeline {
             steps {
                 dir('ansible') {
                     sh 'cat ./inventory/inventory.yaml'
-                    sh 'ansible all -i ./inventory/inventory.yaml -m ping -u Ubuntu'
+                    sh 'ansible all -i ./inventory/inventory.yaml -m ping -u ubuntu'
                 }
             }
         }
