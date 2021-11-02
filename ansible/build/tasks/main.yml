@@ -9,6 +9,7 @@
   apt:
     pkg:
       - docker.io
+    update_cache: yes
     state: present
 
 - name: pass multiple varibales to playbook

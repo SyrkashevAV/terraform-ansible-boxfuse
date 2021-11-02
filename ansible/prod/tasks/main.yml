@@ -4,6 +4,7 @@
   apt:
     pkg:
       - docker.io
+    update_cache: yes
     state: present
 
 #- name: Create a volume
