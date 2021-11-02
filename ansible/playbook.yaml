@@ -1,4 +1,6 @@
 - hosts: build
+  vars:
+    password_docker: "{{ password_docker }}"
   roles:
     - build
 
