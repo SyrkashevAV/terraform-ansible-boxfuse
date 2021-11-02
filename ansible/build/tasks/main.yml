@@ -11,10 +11,9 @@
       - docker.io
     state: present
 
-- name: auth dockerhub
-  community.docker.docker_login:
-    username: malyshevsa
-    password: ${{ password_docker }}
+- name: pass multiple varibales to playbook
+  debug:
+  msg: "Hi This Is {{ password_docker }}"
 
 - name: Build docker image
   community.docker.docker_image:
