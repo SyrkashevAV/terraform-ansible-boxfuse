@@ -1,7 +1,9 @@
 - hosts: build
+  become: yes
   roles:
     - build
 
 - hosts: prod
+  become: yes
   roles:
     - prod
