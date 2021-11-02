@@ -19,17 +19,15 @@ pipeline {
         stage("terraform apply") {
             steps {
                 dir('terraform') {
-                    sh 'pwd'
-                    sh 'ls -la && pwd'
                     sh 'terraform apply -var "yandex-token=${YANDEX_TOKEN}" -var "yandex-cloud-id=${YANDEX_CLOUD_ID}" -var "yandex-folder-id=${YANDEX_FOLDER_ID}" -var "yandex-zone=${YANDEX_ZONE}" -auto-approve'
                 }
             }
         }
-        stage("ansible") {
+        stage("build") {
             steps {
-                dir('terraform') {
-                    sh 'ls -la'
-                    sh 'cat ./../ansible/inventory/inventory.yaml'
+                dir('ansible') {
+                    sh 'cat ./inventory/inventory.yaml'
+                    sh 'ansible -i ./inventory/inventory.yaml -m ping -v'
                 }
             }
         }

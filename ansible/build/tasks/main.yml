@@ -1,2 +1,26 @@
 ---
 # tasks file for build
+- name: add docker file
+  copy:
+    src: Dockerfile
+    dest: /tmp
+
+- name: install packages
+  apt:
+    pkg:
+      - docker.io
+    state: present
+
+- name: auth dockerhub
+  community.docker.docker_login:
+    username: malyshevsa
+    password: "{{ password_docker }}"
+
+- name: Build docker image
+  community.docker.docker_image:
+    build:
+      path: /tmp
+    name: war
+    repository: malyshevsa/build
+    push: yes
+    source: build
