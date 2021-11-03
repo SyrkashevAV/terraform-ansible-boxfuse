@@ -1,19 +1,3 @@
-variable "yandex-token" {}
-
-variable "yandex-cloud-id" {}
-
-variable "yandex-folder-id" {}
-
-variable "yandex-zone" {}
-
-variable "terraform-backend-bucket" {}
-
-variable "backend-key" {}
-
-variable "access-key" {}
-
-variable "secret_key" {}
-
 terraform {
   required_providers {
     yandex = {
@@ -24,11 +8,11 @@ terraform {
 
   backend "s3" {
     endpoint   = "storage.yandexcloud.net"
-    bucket     = var.terraform-backend-bucket
-    region     = var.yandex-zone
-    key        = var.backend-key
-    access_key = var.access-key
-    secret_key = var.secret_key
+    bucket     = "terraform-backend-10"
+    region     = "ru-central1-a"
+    key        = "terraform.tfstate"
+    access_key = "HNvjeaDeGCKv6pwIp6xa"
+    secret_key = "8ruZhJWTa1kTF5D64cP37IYEVz4mZ5dZdW7sg2vo"
 
     skip_region_validation      = true
     skip_credentials_validation = true
