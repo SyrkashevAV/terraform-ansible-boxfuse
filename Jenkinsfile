@@ -9,7 +9,6 @@ pipeline {
         stage("terraform init") {
             steps {
                 dir('terraform') {
-                    sh 'rm -rf .terraform/* .terraform.lock.hcl terraform.tfstate'
                     sh 'terraform init'
                 }
 
@@ -19,7 +18,7 @@ pipeline {
         stage("terraform apply") {
             steps {
                 dir('terraform') {
-                    sh 'terraform apply -var "yandex-token=${YANDEX_TOKEN}" -var "yandex-cloud-id=${YANDEX_CLOUD_ID}" -var "yandex-folder-id=${YANDEX_FOLDER_ID}" -var "yandex-zone=${YANDEX_ZONE}" -auto-approve'
+                    sh 'terraform apply -var "yandex-token=${YANDEX_TOKEN}" -var "yandex-cloud-id=${YANDEX_CLOUD_ID}" -var "yandex-folder-id=${YANDEX_FOLDER_ID}" -var "yandex-zone=${YANDEX_ZONE}" -var "terraform-backend-bucket=${TERRAFORM_BACKEND_BUCKET}" -var "backend-key=${BACKEND_KEY}" -var "access-key=${ACCESS_KEY}" -var "secret_key=${SECRET_KEY}" -auto-approve'
                 }
             }
         }

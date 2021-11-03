@@ -1,17 +1,21 @@
-variable "yandex-token" {}
-
-variable "yandex-cloud-id" {}
-
-variable "yandex-folder-id" {}
-
-variable "yandex-zone" {}
-
 terraform {
   required_providers {
     yandex = {
       source  = "yandex-cloud/yandex"
       version = "0.65.0"
     }
+  }
+
+  backend "s3" {
+    endpoint   = "storage.yandexcloud.net"
+    bucket     = var.terraform-backend-bucket
+    region     = var.yandex-zone
+    key        = var.backend-key
+    access_key = var.access-key
+    secret_key = var.secret_key
+
+    skip_region_validation      = true
+    skip_credentials_validation = true
   }
 }
 
