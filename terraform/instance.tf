@@ -54,9 +54,6 @@ resource "yandex_compute_instance" "build" {
     }
   }
 
-  metadata = {
-    ssh-keys = "extor:${file(var.public_key_path)}"
-  }
 
   provisioner "remote-exec" {
     inline = ["echo Connected!"]
