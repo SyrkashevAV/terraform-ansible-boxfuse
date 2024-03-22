@@ -5,7 +5,17 @@ pipeline {
         }
     }
 
+    agent any
+    tools {
+        terraform 'terraform-stend'
+    }
+
     stages {
+        stage("Git Checkout") {
+            steps {
+                    git credentialsId: '9c4b5e11-3c12-4d86-838a-8ad3a9f4e976', url: 'https://github.com/SyrkashevAV/terraform-ansible-boxfuse.git'
+            }
+        }
         stage("terraform init") {
             steps {
                 dir('terraform') {
@@ -18,7 +28,7 @@ pipeline {
         stage("terraform apply") {
             steps {
                 dir('terraform') {
-                    sh label: '', script: 'terraform apply -auto-approve'
+                    sh label: '', script: 'terraform apply --auto-approve'
                 }
             }
         }
