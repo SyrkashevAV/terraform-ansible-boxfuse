@@ -9,9 +9,7 @@ pipeline {
         stage("terraform init") {
             steps {
                 dir('terraform') {
-                    sh 'pwd'
-                    sh 'ls -la'
-                    sh 'terraform init'
+                    sh "terraform init"
                 }
 
             }
