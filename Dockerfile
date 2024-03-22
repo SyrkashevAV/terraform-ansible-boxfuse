@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-RUN apt update && apt upgrade wget awscli unzip python3 python3-pip -y
+RUN apt update && apt upgrade wget unzip python3 python3-pip -y
 WORKDIR /boxfuse
 RUN wget https://hashicorp-releases.yandexcloud.net/terraform/1.7.5/terraform_1.7.5_linux_arm64.zip \
     && unzip terraform_1.7.5_linux_arm64.zip
