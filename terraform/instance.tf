@@ -55,7 +55,7 @@ resource "yandex_compute_instance" "build" {
   }
 
   metadata = {
-    ssh-keys = file("~/.ssh/id_rsa.pub")
+    ssh-keys = "${file("${var.public_key_path}")}"
   }
 
   provisioner "remote-exec" {
