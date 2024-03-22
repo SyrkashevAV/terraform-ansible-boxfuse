@@ -14,9 +14,9 @@ pipeline {
             steps {
                 dir('terraform') {
                     sh 'pwd'
-                    sh 'ls -la'
+                    sh 'ls -la ../'
                     sh 'ls -la ~'
-                    sh 'cp .terraformrc /var/lib/jenkins'
+                    sh 'cp ../.terraformrc /var/lib/jenkins'
                     sh 'ls -la ~'
                     sh 'terraform init'
                     sh 'ls -la'
@@ -28,7 +28,8 @@ pipeline {
         stage("terraform plan") {
             steps {
                 dir('terraform') {
-                    sh 'ls -la'
+                    sh 'export LANG=ru_RU.UTF8'
+                    sh 'export LC_ALL=ru_RU.UTF8'
                     sh 'terraform plan'
                     sh 'ls -la'
                 }
