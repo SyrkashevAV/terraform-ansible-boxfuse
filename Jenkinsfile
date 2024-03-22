@@ -15,10 +15,19 @@ pipeline {
             }
         }
 
+        stage("terraform plan") {
+            steps {
+                dir('terraform') {
+                    sh 'terraform plan'
+                }
+
+            }
+        }
+
         stage("terraform apply") {
             steps {
                 dir('terraform') {
-                    sh 'terraform apply -var "yandex-token=${YANDEX_TOKEN}" -var "yandex-cloud-id=${YANDEX_CLOUD_ID}" -var "yandex-folder-id=${YANDEX_FOLDER_ID}" -var "yandex-zone=${YANDEX_ZONE}" -var "terraform-backend-bucket=${TERRAFORM_BACKEND_BUCKET}" -var "backend-key=${BACKEND_KEY}" -var "access-key=${ACCESS_KEY}" -var "secret_key=${SECRET_KEY}" -auto-approve'
+                    sh 'terraform apply " -auto-approve'
                 }
             }
         }
