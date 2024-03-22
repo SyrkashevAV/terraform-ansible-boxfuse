@@ -1,6 +1,7 @@
 pipeline {
     agent {
         dockerfile {
+            dir './home/pilot'
             args '-v /home/pilot/.ssh/:/root/.ssh/ -v /var/run/docker.sock:/var/run/docker.sock -u root'
         }
     }
