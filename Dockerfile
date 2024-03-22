@@ -1,5 +1,5 @@
-FROM ubuntu:18.04
-RUN apt update && apt upgrade wget unzip python3 python-pip3 -y
+FROM ubuntu:22.04
+RUN apt update && apt upgrade wget unzip python3 -y
 RUN wget https://hashicorp-releases.yandexcloud.net/terraform/1.7.5/terraform_1.7.5_linux_arm64.zip \
     && unzip terraform_1.7.5_linux_arm64.zip
 ENV LC_ALL=C.UTF-8
