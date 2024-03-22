@@ -63,6 +63,7 @@ resource "yandex_compute_instance" "build" {
       type = "ssh"
       user = "ubuntu"
       agent = false
+      private_key = file(var.private_key_path)
     }
   }
 
