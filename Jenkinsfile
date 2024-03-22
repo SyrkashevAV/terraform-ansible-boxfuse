@@ -5,7 +5,6 @@ pipeline {
         }
     }
 
-    agent any
     tools {
         terraform 'terraform-stend'
     }
