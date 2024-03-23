@@ -35,6 +35,6 @@
 
 - name: Remove image
   community.docker.docker_image:
-    repository: syrkashevav/build
+    name: syrkashevav/build
     tag: v1.0
     state: absent
