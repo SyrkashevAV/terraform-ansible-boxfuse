@@ -28,5 +28,6 @@
       path: /tmp
     name: war
     repository: syrkashevav/build
+    tag: v1.0
     push: yes
     source: build

@@ -20,7 +20,8 @@
   community.docker.docker_container:
     name: build
     state: started
-    image: syrkashevav/build:latest
+    image: syrkashevav/build
+    tag: v1.0
     volumes:
       - volume:/war
 
@@ -32,3 +33,9 @@
     volumes:
       - volume:/usr/local/tomcat/webapps
     ports: 8084:8080
+
+- name: Remove image
+  community.docker.docker_image:
+    repository: syrkashevav/build
+    tag: v1.0
+    state: absent
