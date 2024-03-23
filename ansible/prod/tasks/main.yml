@@ -3,7 +3,6 @@
 - name: install packages
   apt:
     pkg:
-      - default-jdk
       - docker.io
       - python3-pip
     update_cache: yes
