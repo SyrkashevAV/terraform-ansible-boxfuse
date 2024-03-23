@@ -27,6 +27,6 @@
     build:
       path: /tmp
     name: war
-    repository: SyrkashevAV/build
+    repository: syrkashevav/build
     push: yes
     source: build
