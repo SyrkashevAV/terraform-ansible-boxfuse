@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        dockerfile {
-            args '-v /home/pilot/.ssh/:/root/.ssh/ -v /var/run/docker.sock:/var/run/docker.sock -u root'
-        }
-    }
-
+    agent any
     tools {
         terraform 'terraform-stend'
     }
@@ -12,12 +7,13 @@ pipeline {
     stages {
         stage("Git Checkout") {
             steps {
-                    git credentialsId: '9c4b5e11-3c12-4d86-838a-8ad3a9f4e976', url: 'https://github.com/SyrkashevAV/terraform-ansible-boxfuse.git'
+                    git credentialsId: '7cc7a8a2-3d87-48f1-a056-9e03b1a0ba86', url: 'https://github.com/SyrkashevAV/terraform-ansible-boxfuse.git'
             }
         }
         stage("terraform init") {
             steps {
                 dir('terraform') {
+                    sh 'cp ../.terraformrc /var/lib/jenkins'
                     sh 'terraform init'
                 }
 
@@ -28,7 +24,6 @@ pipeline {
             steps {
                 dir('terraform') {
                     sh 'terraform plan'
-                    sh 'la -la'
                 }
 
             }
@@ -45,7 +40,7 @@ pipeline {
             steps {
                 dir('ansible') {
                     sh 'ansible-galaxy collection install community.docker'
-                    sh 'ansible-playbook playbook.yaml -i ./inventory/inventory.yaml -u ubuntu --extra-vars "password_docker=${DOCKER_HUB_PASSWORD}"'
+                    sh 'ansible-playbook playbook.yaml -i ./inventory/inventory.yaml -u ubuntu --extra-vars "password_docker=Pilot_Jgnbvev_1966"'
                 }
             }
         }
