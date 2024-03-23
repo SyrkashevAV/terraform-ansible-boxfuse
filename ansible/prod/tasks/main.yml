@@ -32,9 +32,3 @@
     volumes:
       - volume:/usr/local/tomcat/webapps
     ports: 8084:8080
-
-- name: Remove image
-  community.docker.docker_image:
-    name: syrkashevav/build
-    tag: v1.0
-    state: absent
