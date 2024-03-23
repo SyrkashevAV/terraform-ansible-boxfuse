@@ -47,7 +47,7 @@ pipeline {
         stage("terraform destroy") {
             steps {
                 dir('terraform') {
-                    sh 'terraform destroy -target instance1'
+                    sh 'terraform destroy -target yandex_compute_instance.build[0] -auto-approve'
                 }
             }
         }
