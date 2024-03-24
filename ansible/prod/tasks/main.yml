@@ -34,7 +34,7 @@
     ports: 8084:8080
 
 - name: Copying an artifact
-  ansible.builtin.copy:
+  copy:
       src: /tmp/war/hello-1.0.war
       dest: /usr/local/tomcat/webapps/
       owner: root
