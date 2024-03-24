@@ -16,19 +16,37 @@
   community.docker.docker_volume:
     name: volume
 
-- name: start conteiner build
+- name: start build a temporary container
   community.docker.docker_container:
-    name: build
+    name: temporary_build
     state: started
     image: syrkashevav/build:v1.0
     volumes:
-      - volume:/war
+      - volume:/warfile
 
 - name: start conteiner run
   community.docker.docker_container:
-    name: run
+    name: tomcat
     state: started
     image: tomcat:9.0.20-jre8-alpine
     volumes:
-      - volume:/usr/local/tomcat/webapps
+      - volume:/warfile
     ports: 8084:8080
+
+- name: copying an artifact
+  ansible.builtin.copy:
+    src: /warfile/hello-1.0.war
+    dest: /usr/local/tomcat/webapps
+    follow: yes
+
+- name: remove a temporary container
+  become: yes
+  docker_container:
+    name: temporary_build
+    state: absent
+
+- name: Remove an image on Docker Hub
+  community.docker.docker_image:
+    name: syrkashevav/build
+    tag: v1.0
+    state: absent
