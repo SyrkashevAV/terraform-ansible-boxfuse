@@ -34,4 +34,4 @@
     ports: 8084:8080
 
 - name: Copying an artifact
-  shell: ls -la /tmp/war/
+  shell: pwd
