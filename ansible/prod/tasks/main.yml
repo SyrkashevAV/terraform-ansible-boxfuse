@@ -20,7 +20,7 @@
   community.docker.docker_container:
     name: build
     state: started
-    image: syrkashevav/build:latest
+    image: syrkashevav/build:v1.0
     volumes:
       - volume:/war
 
