@@ -1,11 +1,11 @@
 ---
 # tasks file for build
-- name: Add docker file
+- name: add docker file
   copy:
     src: Dockerfile
     dest: /tmp
 
-- name: Install packages
+- name: install packages
   apt:
     pkg:
       - docker.io
@@ -13,21 +13,7 @@
     update_cache: yes
     state: present
 
-- name: Pip install docker
+- name: pip install docker
   pip:
     name: docker
 
-- name: Auth dockerhub
-  community.docker.docker_login:
-    username: syrkashevav
-    password: "{{ password_docker }}"
-
-- name: Build docker image
-  community.docker.docker_image:
-    build:
-      path: /tmp
-    name: war
-    repository: syrkashevav/build
-    tag: v1.0
-    push: yes
-    source: build
