@@ -22,7 +22,7 @@
     state: started
     image: syrkashevav/build:v1.0
     volumes:
-      - volume:/warfile
+      - volume:/war
 
 - name: Start conteiner tomcat
   community.docker.docker_container:
@@ -30,22 +30,12 @@
     state: started
     image: tomcat:9.0.20-jre8-alpine
     volumes:
-      - volume:/warfile
+      - volume:/war
     ports: 8081:8080
-
-- name: This command will change the working directory to somedir/
-  ansible.builtin.shell:
-    cmd: ls -l
-    chdir: /var/lib/docker/volumes/
-
-- name: This command will change the working directory to somedir/
-  ansible.builtin.shell:
-    cmd: ls -l | grep hell0-1.0.war
-    chdir: warfile/
 
 - name: Copying an artifact
   ansible.builtin.copy:
-    src: /warfile/hello-1.0.war
+    src: /war
     dest: /usr/local/tomcat/webapps
     follow: yes
 
