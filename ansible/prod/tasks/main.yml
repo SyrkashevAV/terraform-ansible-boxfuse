@@ -35,7 +35,7 @@
 
 - name: Copying an artifact
   copy:
-      src: /tmp/war/hello-1.0.war
+      src: /var/lib/docker/volumes/volume/_data/hello-1.0.war
       dest: /usr/local/tomcat/webapps/
       owner: root
       group: root
