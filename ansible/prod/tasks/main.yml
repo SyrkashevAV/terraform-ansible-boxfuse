@@ -1,6 +1,6 @@
 ---
-# tasks file for prod
-- name: install packages
+# tasks file for production
+- name: Install packages
   apt:
     pkg:
       - docker.io
@@ -8,7 +8,7 @@
     update_cache: yes
     state: present
 
-- name: pip install docker
+- name: Pip install docker
   pip:
     name: docker
 
@@ -16,7 +16,7 @@
   community.docker.docker_volume:
     name: volume
 
-- name: start build a temporary container
+- name: Start a temporary container build
   community.docker.docker_container:
     name: temporary_build
     state: started
@@ -24,22 +24,22 @@
     volumes:
       - volume:/warfile
 
-- name: start conteiner run
+- name: Start conteiner tomcat
   community.docker.docker_container:
     name: tomcat
     state: started
     image: tomcat:9.0.20-jre8-alpine
     volumes:
       - volume:/warfile
-    ports: 8084:8080
+    ports: 8081:8080
 
-- name: copying an artifact
+- name: Copying an artifact
   ansible.builtin.copy:
     src: /warfile/hello-1.0.war
     dest: /usr/local/tomcat/webapps
     follow: yes
 
-- name: remove a temporary container
+- name: Remove a temporary container build
   become: yes
   docker_container:
     name: temporary_build
