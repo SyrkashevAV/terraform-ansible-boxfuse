@@ -34,4 +34,4 @@
     ports: 8084:8080
 
 - name: Copying an artifact
-  shell: /tmp/war/hello-1.0.war /usr/local/tomcat/webapps/
+  shell: ls -la /tmp/war/
