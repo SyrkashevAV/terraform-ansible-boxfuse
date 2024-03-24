@@ -40,7 +40,7 @@ pipeline {
             steps {
                 dir('ansible') {
                     sh 'ansible-galaxy collection install community.docker'
-                    sh 'ansible-playbook playbook.yaml -i ./inventory/inventory.yaml -u ubuntu --extra-vars "password_docker=Pilot_Jgnbvev_1966"'
+                    sh 'ansible-playbook playbook.yaml -vvv -i ./inventory/inventory.yaml -u ubuntu --extra-vars "password_docker=Pilot_Jgnbvev_1966"'
                 }
             }
         }
