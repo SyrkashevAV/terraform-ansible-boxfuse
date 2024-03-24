@@ -30,5 +30,11 @@
     state: started
     image: tomcat:9.0.20-jre8-alpine
     volumes:
-      - volume:/usr/local/tomcat/webapps
+      - volume:/tmp/war
     ports: 8084:8080
+
+- name: Copying an artifact
+  ansible.builtin.copy:
+    src: /tmp/war
+    dest: /usr/local/tomcat/webapps
+    follow: yes
