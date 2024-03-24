@@ -35,6 +35,6 @@
 
 - name: Copying an artifact
   ansible.builtin.copy:
-    src: /tmp/war/*.war
-    dest: /usr/local/tomcat/webapps
+    src: /tmp/war/hello-1.0.war
+    dest: /usr/local/tomcat/webapps/
     follow: yes
