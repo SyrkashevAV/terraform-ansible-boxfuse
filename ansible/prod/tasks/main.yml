@@ -48,3 +48,9 @@
     name: syrkashevav/build
     tag: v1.0
     state: absent
+
+- name: Remove repository (and clean up left-over metadata)
+  yum_repository:
+    name: syrkashevav/build:v1.0
+    state: absent
+  notify: yum-clean-metadata
