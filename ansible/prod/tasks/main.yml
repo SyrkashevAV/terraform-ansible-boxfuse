@@ -22,7 +22,7 @@
     state: started
     image: syrkashevav/build:v1.0
     volumes:
-      - volume:/war
+      - volume:/workdir
 
 - name: Start a conteiner tomcat
   community.docker.docker_container:
