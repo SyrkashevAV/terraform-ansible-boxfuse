@@ -30,13 +30,15 @@
     state: started
     image: tomcat:9.0.20-jre8-alpine
     volumes:
-      - volume:/tmp/war
+      - volume:/usr/local/tomcat/webapps/
     ports: 8084:8080
 
-- name: Copying an artifact
-  copy:
-      src: /var/lib/docker/volumes/volume/_data/hello-1.0.war
-      dest: /usr/local/tomcat/webapps/
-      owner: root
-      group: root
-      mode: 0644
+- name: Stop a container
+  community.docker.docker_container:
+    name: build
+    state: stopped
+
+- name: Remove container
+  community.docker.docker_container:
+    name: build
+    state: absent
