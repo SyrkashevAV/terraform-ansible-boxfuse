@@ -1,4 +1,5 @@
 pipeline {
+    options { timestamps() }
     agent any
     tools {
         terraform 'terraform-stend'
