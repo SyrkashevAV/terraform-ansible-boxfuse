@@ -33,7 +33,7 @@ resource "yandex_vpc_subnet" "subnet" {
   }
 }
 
-resource "yandex_compute_instance" "Staging" {
+resource "yandex_compute_instance" "staging" {
   count = "${var.num_nodes}"
   name = "${var.instance_name}${count.index + 1}"
 
