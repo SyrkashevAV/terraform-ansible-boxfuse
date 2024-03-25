@@ -1,6 +1,6 @@
 ---
 # tasks file for prod
-- name: install packages
+- name: Install packages
   apt:
     pkg:
       - docker.io
@@ -8,7 +8,7 @@
     update_cache: yes
     state: present
 
-- name: pip install docker
+- name: Pip install docker
   pip:
     name: docker
 
@@ -16,29 +16,35 @@
   community.docker.docker_volume:
     name: volume
 
-- name: start conteiner build
+- name: Start a conteiner build
   community.docker.docker_container:
     name: build
     state: started
     image: syrkashevav/build:v1.0
     volumes:
-      - volume:/war
+      - volume:/warfile
 
-- name: start conteiner run
+- name: Start a conteiner tomcat
   community.docker.docker_container:
-    name: run
+    name: tomcat
     state: started
     image: tomcat:9.0.20-jre8-alpine
     volumes:
       - volume:/usr/local/tomcat/webapps/
-    ports: 8084:8080
+    ports: 8081:8080
 
-- name: Stop a container
+- name: Stop a container build
   community.docker.docker_container:
     name: build
     state: stopped
 
-- name: Remove container
+- name: Remove a container build
   community.docker.docker_container:
     name: build
+    state: absent
+
+- name: Remove an image on Docker Hub
+  community.docker.docker_image:
+    name: syrkashevav/build
+    tag: v1.0
     state: absent
