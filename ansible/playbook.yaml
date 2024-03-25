@@ -1,9 +1,9 @@
-- hosts: staging
+- hosts: build
   become: yes
   roles:
-    - Staging
+    - build
 
-- hosts: production
+- hosts: prod
   become: yes
   roles:
-    - Production
+    - prod

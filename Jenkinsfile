@@ -10,7 +10,7 @@ pipeline {
                     git credentialsId: '7cc7a8a2-3d87-48f1-a056-9e03b1a0ba86', url: 'https://github.com/SyrkashevAV/terraform-ansible-boxfuse.git'
             }
         }
-        stage("Terraform init") {
+        stage("terraform init") {
             steps {
                 dir('terraform') {
                     sh 'cp ../.terraformrc /var/lib/jenkins'
@@ -20,7 +20,7 @@ pipeline {
             }
         }
 
-        stage("Terraform plan") {
+        stage("terraform plan") {
             steps {
                 dir('terraform') {
                     sh 'terraform plan'
@@ -29,25 +29,18 @@ pipeline {
             }
         }
 
-        stage("Terraform apply") {
+        stage("terraform apply") {
             steps {
                 dir('terraform') {
                     sh 'terraform apply --auto-approve'
                 }
             }
         }
-        stage("Build") {
+        stage("build") {
             steps {
                 dir('ansible') {
                     sh 'ansible-galaxy collection install community.docker'
-                    sh 'ansible-playbook playbook.yaml -i inventory.yaml -u devops --extra-vars "docker_hub_password=@main.yml"'
-                }
-            }
-        }
-        stage("Terraform destroy") {
-            steps {
-                dir('terraform') {
-                    sh 'terraform destroy -target yandex_compute_instance.build[0] -auto-approve'
+                    sh 'ansible-playbook playbook.yaml -i ./inventory/inventory.yaml -u ubuntu --extra-vars "password_docker=Pilot_Jgnbvev_1966"'
                 }
             }
         }

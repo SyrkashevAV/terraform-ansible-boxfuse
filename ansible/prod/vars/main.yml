@@ -1,3 +1,2 @@
 ---
-# vars file for build
-docker_hub_password: "{{ password_docker }}"
+# vars file for prod

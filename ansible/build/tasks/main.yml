@@ -1,6 +1,11 @@
 ---
-# tasks file for prod
-- name: Install packages
+# tasks file for build
+- name: add docker file
+  copy:
+    src: Dockerfile
+    dest: /tmp
+
+- name: install packages
   apt:
     pkg:
       - docker.io
@@ -8,43 +13,20 @@
     update_cache: yes
     state: present
 
-- name: Pip install docker
+- name: pip install docker
   pip:
     name: docker
 
-- name: Create a volume
-  community.docker.docker_volume:
-    name: volume
+- name: auth dockerhub
+  community.docker.docker_login:
+    username: syrkashevav
+    password: "{{ password_docker }}"
 
-- name: Start a conteiner build
-  community.docker.docker_container:
-    name: build
-    state: started
-    image: syrkashevav/build:v1.0
-    volumes:
-      - volume:/workdir
-
-- name: Start a conteiner tomcat
-  community.docker.docker_container:
-    name: tomcat
-    state: started
-    image: tomcat:9.0.20-jre8-alpine
-    volumes:
-      - volume:/usr/local/tomcat/webapps/
-    ports: 8081:8080
-
-- name: Stop a container build
-  community.docker.docker_container:
-    name: build
-    state: stopped
-
-- name: Remove a container build
-  community.docker.docker_container:
-    name: build
-    state: absent
-
-- name: Remove an image on Docker Hub
+- name: Build docker image
   community.docker.docker_image:
-    name: syrkashevav/build
-    tag: v1.0
-    state: absent
+    build:
+      path: /tmp
+    name: war
+    repository: syrkashevav/build
+    push: yes
+    source: build
