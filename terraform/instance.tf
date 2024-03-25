@@ -64,7 +64,7 @@ resource "yandex_compute_instance" "build" {
     connection {
       host = self.network_interface[0].nat_ip_address
       type = "ssh"
-      user = "ubuntu"
+      user = "devops"
       agent = false
       private_key = "${file(var.private_key_path)}"
     }
