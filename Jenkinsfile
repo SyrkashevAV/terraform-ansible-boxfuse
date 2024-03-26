@@ -37,7 +37,7 @@ pipeline {
                 }
             }
         }
-        stage("Build") {
+        stage("Build on ansible") {
             steps {
                 dir('ansible') {
                     sh 'ansible-galaxy collection install community.docker'
