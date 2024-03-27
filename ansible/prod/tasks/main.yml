@@ -33,13 +33,6 @@
       - volume:/usr/local/tomcat/webapps/
     ports: 8081:8080
 
-- name: Add temp marker
-  lineinfile:
-    path: /usr/local/tomcat/bin/catalina.sh
-    insertafter: '### AFTER THIS LINE'
-    line: "###TEMP MARKER###"
-    state: present
-
 - name: add docker file
   copy:
     src: catalina-jmx-remote.jar
