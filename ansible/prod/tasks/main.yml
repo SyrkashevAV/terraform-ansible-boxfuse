@@ -34,7 +34,7 @@
     ports: "{{ item }}:{{ item }}"
   with_items:
     - 8080
-    - 12345
+    - 10050
 
 - name: add docker file
   copy:
