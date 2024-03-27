@@ -35,7 +35,6 @@
   with_items:
     - 8080
     - 10050
-    - 12345
 
 - name: add docker file
   copy:
