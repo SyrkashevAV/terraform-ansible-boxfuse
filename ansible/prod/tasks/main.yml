@@ -39,7 +39,7 @@
     ports: 8081:8080
 
 - name: Line test2
-  lineinfile::
+  lineinfile:
     dest: /var/lib/docker/volumes/web_data/_data/catalina.sh
     line: "{{ item }}"
     insertbefore: EOF
