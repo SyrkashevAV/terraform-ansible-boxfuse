@@ -34,7 +34,7 @@
     ports: 8081:8080
 
 - name: From remote to local catalina.sh
-  copy:
+  fetch:
     src: /usr/local/tomcat/bin/catalina.sh
     dest: /shfile
 
