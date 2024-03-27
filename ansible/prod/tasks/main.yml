@@ -33,11 +33,11 @@
       - volume:/usr/local/tomcat/webapps/
     ports: 8081:8080
 
-- name: Downloading the catalina-jmx-remote package.jar to the lib directory
-  get_url:
-    url: http://archive.apache.org/dist/tomcat/tomcat-9/v9.0.8/bin/extras/catalina-jmx-remote.jar
-    dest: "/usr/local/tomcat/webapps/"
-  tags: pre-install
+- name: Copy a file into the container
+  community.docker.docker_container_copy_into:
+    container: tomcat
+    path: catalina-jmx-remote.jar
+    container_path: /usr/local/tomcat/lib
 
 - name: Stop a container build
   community.docker.docker_container:
