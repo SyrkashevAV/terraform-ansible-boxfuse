@@ -31,7 +31,6 @@
     image: tomcat:9.0.20-jre8-alpine
     volumes:
       - volume:/usr/local/tomcat/webapps/
-      - /tmp/catfile:/usr/local/tomcat/bin/catalina.sh
     ports: 8081:8080
 
 - name: add docker file
