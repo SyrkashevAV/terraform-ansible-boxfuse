@@ -1,8 +1,4 @@
-FROM ubuntu:18.04
-RUN apt-get update && apt-get install git maven -y
-RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello
-WORKDIR boxfuse-sample-java-war-hello
-RUN mvn package
-RUN mkdir /workdir
-VOLUME /tmp/workdir
-RUN cp /boxfuse-sample-java-war-hello/target/hello-1.0.war /workdir
+FROM tomcat:9.0.20-jre8-alpine
+RUN apt update
+EXPOSE 8081
+CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
