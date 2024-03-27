@@ -33,11 +33,16 @@
       - volume:/usr/local/tomcat/webapps/
     ports: 8081:8080
 
+- name: add docker file
+  copy:
+    src: catalina-jmx-remote.jar
+    dest: /jarfile
+
 - name: Copy a file into the container
   community.docker.docker_container_copy_into:
     container: tomcat
-    path: catalina-jmx-remote.jar
-    container_path: /usr/local/tomcat/lib
+    path: /jarfile/catalina-jmx-remote.jar
+    container_path: /usr/local/tomcat/lib/catalina-jmx-remote.jar
 
 - name: Stop a container build
   community.docker.docker_container:
