@@ -31,7 +31,7 @@
     image: tomcat:9.0.20-jre8-alpine
     volumes:
       - volume:/usr/local/tomcat/webapps/
-    ports: "{{ item }}:{{ item }}"
+    ports: "{{ item }}+1:{{ item }}"
   with_items:
     - 8080
     - 10050
