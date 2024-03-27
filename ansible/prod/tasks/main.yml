@@ -10,7 +10,6 @@
     name: tomcat
     build:
       path: /tmp
-      source: build
     state: present
 
 - name: Pip install docker
