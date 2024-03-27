@@ -6,12 +6,12 @@
     dest: /tmp
 
 - name: build container image
-    docker_image:
-      name: tomcat
-      build:
-        path: /tmp
-        source: build
-      state: present
+  docker_image:
+    name: tomcat
+    build:
+      path: /tmp
+      source: build
+    state: present
 
 - name: Pip install docker
   pip:
