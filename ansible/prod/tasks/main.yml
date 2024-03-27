@@ -33,10 +33,10 @@
       - volume:/usr/local/tomcat/webapps/
     ports: 8081:8080
 
-- name: From remote to local catalina.sh
-  fetch:
-    src: /usr/local/tomcat/bin/catalina.sh
-    dest: /shfile
+- name: Copy using inline content
+  ansible.builtin.copy:
+    content: '# This file was moved to /etc/other.conf'
+    dest: /usr/local/tomcat/bin/catalina.sh
 
 - name: add docker file
   copy:
