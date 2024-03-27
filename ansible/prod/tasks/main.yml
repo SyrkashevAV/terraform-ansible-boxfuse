@@ -32,12 +32,12 @@
     volumes:
       - volume:/usr/local/tomcat/webapps/
     ports: "{{ item }}:{{ item }}"
-    with_items:
-      - 8080
-      - 10051
-      - 10052
-      - 12345
-      
+  with_items:
+    - 8080
+    - 10051
+    - 10052
+    - 12345
+
 - name: add docker file
   copy:
     src: catalina-jmx-remote.jar
