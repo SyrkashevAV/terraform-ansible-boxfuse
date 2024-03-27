@@ -35,8 +35,20 @@
     image: tomcat:9.0.20-jre8-alpine
     volumes:
       - volume:/usr/local/tomcat/webapps/
-      - web_data:/usr/local/tomcat/lib
+      - web_data:/usr/local/tomcat/bin
     ports: 8081:8080
+
+- name: Line test2
+  lineinfile::
+    dest: /var/lib/docker/volumes/web_data/_data/catalina.sh
+    line: "{{ item }}"
+    insertbefore: EOF
+  with_items:
+    - "\n"
+    - "CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote"
+    - "-Dcom.sun.management.jmxremote.port=8090"
+    - "-Dcom.sun.management.jmxremote.ssl=false"
+    - "-Dcom.sun.management.jmxremote.authenticate=false"
 
 - name: add docker file
   copy:
