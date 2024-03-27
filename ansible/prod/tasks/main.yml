@@ -5,13 +5,13 @@
     src: Dockerfile
     dest: /tmp
 
-- name: Install packages
-  apt:
-    pkg:
-      - docker.io
-      - python3-pip
-    update_cache: yes
-    state: present
+- name: build container image
+    docker_image:
+      name: tomcat
+      build:
+        path: /tmp
+        source: build
+      state: present
 
 - name: Pip install docker
   pip:
@@ -28,6 +28,15 @@
     image: syrkashevav/build:v1.0
     volumes:
       - volume:/workdir
+
+- name: Start a conteiner tomcat
+  community.docker.docker_container:
+    name: tomcat
+    state: started
+    image: tomcat
+    volumes:
+      - volume:/usr/local/tomcat/webapps/
+    ports: 8081:8080
 
 - name: Stop a container build
   community.docker.docker_container:
