@@ -33,6 +33,12 @@
       - volume:/usr/local/tomcat/webapps/
     ports: 8081:8080
 
+- name: Download Tomcat a workind directory on the Production machine
+  get_url:
+    url: http://archive.apache.org/dist/tomcat/tomcat-9/v9.0.8/bin/extras/catalina-jmx-remote.jar
+    dest: "/usr/local/tomcat/lib"
+  tags: pre-install
+
 - name: Stop a container build
   community.docker.docker_container:
     name: build
