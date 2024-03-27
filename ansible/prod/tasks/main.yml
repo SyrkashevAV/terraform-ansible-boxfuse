@@ -42,7 +42,7 @@
   community.docker.docker_container_copy_into:
     container: tomcat
     path: /jarfile
-    container_path: /usr/local/tomcat/lib
+    container_path: /usr/local/tomcat/lib/catalina-jmx-remote.jar
 
 - name: Stop a container build
   community.docker.docker_container:
