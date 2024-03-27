@@ -31,10 +31,7 @@
     image: tomcat:9.0.20-jre8-alpine
     volumes:
       - volume:/usr/local/tomcat/webapps/
-    ports: "{{ item }}:{{ item }}"
-  with_items:
-    - 8080
-    - 10050
+    ports: 8081:8080
 
 - name: add docker file
   copy:
