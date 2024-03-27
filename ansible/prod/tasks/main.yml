@@ -33,10 +33,12 @@
       - volume:/usr/local/tomcat/webapps/
     ports: 8081:8080
 
-- name: Copy using inline content
-  ansible.builtin.copy:
-    content: '# This file was moved to /etc/other.conf'
-    dest: /usr/local/tomcat/bin/catalina.sh
+- name: Add temp marker
+    lineinfile:
+      path: /usr/local/tomcat/bin/catalina.sh
+      insertafter: '### AFTER THIS LINE'
+      line: "###TEMP MARKER###"
+      state: present
 
 - name: add docker file
   copy:
