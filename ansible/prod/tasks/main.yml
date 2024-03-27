@@ -61,17 +61,6 @@
     path: /jarfile
     container_path: /usr/local/tomcat/lib/catalina-jmx-remote.jar
 
-- name: Copy file catalina.sh
-  copy:
-    src: catalina.sh
-    dest: /catalinafile
-
-- name: Copy a catalina-file into the container
-  community.docker.docker_container_copy_into:
-    container: tomcat
-    path: /catalinafile
-    container_path: /usr/local/tomcat/bin/catalina.sh
-
 - name: Stop a container build
   community.docker.docker_container:
     name: build
