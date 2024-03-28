@@ -121,12 +121,15 @@
     group: root
     mode: "0755"
 
-- name: Go Into Docker Container And Run Multiple Commands
-  docker:
+- name: add container to inventory
+  add_host:
     name: tomcat
-    image: tomcat:9.0.20-jre8-alpine
-    state: present
-    command: docker exec -it tomcat mkdir -p /etc/systemd/system
+    ansible_connection: docker
+  changed_when: false
+
+- name: run command in container
+  delegate_to: tomcat
+  raw: docker exec -it tomcat mkdir -p /etc/systemd/system
 
 - name: Copy a tomcat.service into the container
   community.docker.docker_container_copy_into:
