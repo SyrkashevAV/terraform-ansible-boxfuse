@@ -127,12 +127,6 @@
     image: tomcat:9.0.20-jre8-alpine
     command: ["mkdir", "-p /etc/systemd/system"]
 
-- name: Copy a tomcat.service into the container
-  community.docker.docker_container_copy_into:
-    container: tomcat
-    path: /etc/systemd/system/tomcat.service
-    container_path: /etc/systemd/system/tomcat.service
-
 - name: Restart a container tomcat
   community.docker.docker_container:
     name: tomcat
