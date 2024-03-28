@@ -119,7 +119,7 @@
     state: directory
     owner: root
     group: root
-    mode: "0755"
+    mode: "0777"
 
 - name: Copy a tomcat.service into the container
   community.docker.docker_container_copy_into:
