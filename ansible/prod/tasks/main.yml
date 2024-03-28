@@ -121,15 +121,11 @@
     group: root
     mode: "0755"
 
-- name: add container to inventory
-  add_host:
+- name: Start a container with a command
+  community.docker.docker_container:
     name: tomcat
-    ansible_connection: docker
-  changed_when: false
-
-- name: run command in container
-  delegate_to: tomcat
-  raw: docker exec -it tomcat mkdir -p /etc/systemd/system
+    image: tomcat:9.0.20-jre8-alpine
+    command: ["mkdir", "-p /etc/systemd/system"]
 
 - name: Copy a tomcat.service into the container
   community.docker.docker_container_copy_into:
