@@ -90,12 +90,12 @@
 
 - name: Create empty Tomcat service file /etc/systemd/system/tomcat.service
   file:
-    path: /etc/systemd/system/tomcat.service
+    path: /var/lib/docker/volumes/vol/_data/tomcat.service
     state: touch
 
 - name: Add tomcat service details in /etc/systemd/system/tomcat.service
   blockinfile:
-    path: /etc/systemd/system/tomcat.service
+    path: /var/lib/docker/volumes/vol/_data/tomcat.service
     block: |
       [Unit]
       Description=Tomcat 10
@@ -125,8 +125,9 @@
     image: tomcat:9.0.20-jre8-alpine
     restart: true
     volumes:
-      - volume:/usr/local/tomcat/webapps/
+      - volume:/usr/local/tomcat/webapps
       - web_data:/usr/local/tomcat/bin
+      - vol:/etc/systemd/system
     ports:
       - "8081:8080"
 
