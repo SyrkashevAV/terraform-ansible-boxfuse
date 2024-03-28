@@ -121,12 +121,6 @@
     group: root
     mode: "0755"
 
-- name: Start a container with a command
-  community.docker.docker_container:
-    name: tomcat
-    image: tomcat:9.0.20-jre8-alpine
-    command: ["cmd", "mkdir -p /etc/systemd/system"]
-
 - name: Go Into Docker Container And Run Multiple Commands
   docker:
     name: tomcat
