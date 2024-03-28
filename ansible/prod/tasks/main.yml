@@ -16,7 +16,7 @@
   community.docker.docker_volume:
     name: volume
 
-- name:Create a volume web_data for catalina-jmx-remote.jar
+- name: Create a volume web_data for catalina-jmx-remote.jar
   community.docker.docker_volume:
     name: web_data
 
