@@ -1,4 +1,3 @@
 ---
 # defaults file for prod
 path_tomcat: /usr/local/tomcat
-hostname: "{{ prod_ip }}"
