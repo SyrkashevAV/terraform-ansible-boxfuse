@@ -50,16 +50,29 @@
     - '-Dcom.sun.management.jmxremote.ssl=false'
     - '-Dcom.sun.management.jmxremote.authenticate=false"'
 
-- name: add docker file
-  copy:
-    src: catalina-jmx-remote.jar
+- name: Download jar-file
+  get_url:
+    url: http://archive.apache.org/dist/tomcat/tomcat-9/v9.0.8/bin/extras/catalina-jmx-remote.jar
     dest: /jarfile
+  tags: pre-install
 
 - name: Copy a jar-file into the container
   community.docker.docker_container_copy_into:
     container: tomcat
     path: /jarfile
     container_path: /usr/local/tomcat/lib/catalina-jmx-remote.jar
+
+- name: Restart a container tomcat
+  community.docker.docker_container:
+    name: tomcat
+    state: started
+    image: tomcat:9.0.20-jre8-alpine
+    restart: true
+    volumes:
+      - volume:/usr/local/tomcat/webapps/
+      - web_data:/usr/local/tomcat/bin
+    ports:
+      - "8081:8080"
 
 - name: Stop a container build
   community.docker.docker_container:
