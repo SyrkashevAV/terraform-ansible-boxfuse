@@ -113,6 +113,14 @@
       [Install]
       WantedBy=multi-user.target
 
+- name: create build directory
+  file:
+    path: /etc/systemd/system
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
 - name: Copy a tomcat.service into the container
   community.docker.docker_container_copy_into:
     container: tomcat
