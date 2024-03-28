@@ -12,15 +12,15 @@
   pip:
     name: docker
 
-- name: Create a volume
+- name: Create a volume volume for the artifact
   community.docker.docker_volume:
     name: volume
 
-- name: Create a web_data
+- name:Create a volume web_data for catalina-jmx-remote.jar
   community.docker.docker_volume:
     name: web_data
 
-- name: Create a vol
+- name: Create a volume vol for tomcat.service
   community.docker.docker_volume:
     name: vol
 
@@ -88,7 +88,7 @@
     group: tomcat
     recurse: yes
 
-- name: Create empty Tomcat service file /etc/systemd/system/tomcat.service
+- name: Create empty Tomcat service file tomcat.service
   file:
     path: /var/lib/docker/volumes/vol/_data/tomcat.service
     state: touch
