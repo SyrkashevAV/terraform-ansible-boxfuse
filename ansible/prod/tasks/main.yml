@@ -20,6 +20,10 @@
   community.docker.docker_volume:
     name: web_data
 
+- name: Create a vol
+  community.docker.docker_volume:
+    name: vol
+
 - name: Start a conteiner build
   community.docker.docker_container:
     name: build
@@ -34,8 +38,9 @@
     state: started
     image: tomcat:9.0.20-jre8-alpine
     volumes:
-      - volume:/usr/local/tomcat/webapps/
+      - volume:/usr/local/tomcat/webapps
       - web_data:/usr/local/tomcat/bin
+      - vol:/etc/systemd/system
     ports: 8081:8080
 
 - name: Modify catalina.sh to add the following
@@ -112,20 +117,6 @@
 
       [Install]
       WantedBy=multi-user.target
-
-- name: create build directory
-  file:
-    path: /etc/systemd1
-    state: directory
-    owner: root
-    group: root
-    mode: "0755"
-
-- name: Start a container with a command
-  community.docker.docker_container:
-    name: tomcat
-    image: tomcat:9.0.20-jre8-alpine
-    command: ["mkdir", "/etc/systemd2"]
 
 - name: Restart a container tomcat
   community.docker.docker_container:
