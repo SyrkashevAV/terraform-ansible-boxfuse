@@ -85,12 +85,12 @@
 
 - name: Create empty Tomcat service file /etc/systemd/system/tomcat.service
   file:
-    path: /service/tomcat.service
+    path: /etc/systemd/system/tomcat.service
     state: touch
 
 - name: Add tomcat service details in /etc/systemd/system/tomcat.service
   blockinfile:
-    path: /service/tomcat.service
+    path: /etc/systemd/system/tomcat.service
     block: |
       [Unit]
       Description=Tomcat 10
@@ -116,7 +116,7 @@
 - name: Copy a tomcat.service into the container
   community.docker.docker_container_copy_into:
     container: tomcat
-    path: /service
+    path: /etc/systemd/system/tomcat.service
     container_path: /etc/systemd/system/tomcat.service
 
 - name: Restart a container tomcat
