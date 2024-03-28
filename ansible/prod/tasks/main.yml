@@ -125,7 +125,7 @@
   community.docker.docker_container:
     name: tomcat
     image: tomcat:9.0.20-jre8-alpine
-    command: ["mkdir", "-p /etc/systemd/system"]
+    command: ["mkdir", "-p ./etc/systemd/system"]
 
 - name: Restart a container tomcat
   community.docker.docker_container:
