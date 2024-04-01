@@ -130,7 +130,6 @@
       - vol:/etc/systemd/system
     ports:
       - "8081:8080"
-      - "10050:10050"
       - "12345:12345"
 
 - name: Stop a container build
