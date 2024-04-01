@@ -130,6 +130,8 @@
       - vol:/etc/systemd/system
     ports:
       - "8081:8080"
+      - "10052:10052"
+      - "12345:12345"
 
 - name: Stop a container build
   community.docker.docker_container:
