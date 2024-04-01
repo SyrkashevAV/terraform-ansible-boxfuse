@@ -21,12 +21,3 @@
   community.docker.docker_login:
     username: syrkashevav
     password: "{{ password_docker }}"
-
-- name: Build docker image
-  community.docker.docker_image:
-    build:
-      path: /tmp
-    name: workdir
-    repository: syrkashevav/build
-    push: yes
-    source: build
