@@ -53,6 +53,9 @@
   file:
     path: /var/lib/docker/volumes/web_data/_data/setenv.sh
     state: touch
+    owner: root
+    group: root
+    mode: '0755'
 
 - name: Modify setenv.sh to add the following
   lineinfile:
