@@ -24,6 +24,10 @@
   community.docker.docker_volume:
     name: vol
 
+- name: Create a volume vol for config.yml
+  community.docker.docker_volume:
+    name: vol_tmp
+
 - name: Start a conteiner build
   community.docker.docker_container:
     name: build
