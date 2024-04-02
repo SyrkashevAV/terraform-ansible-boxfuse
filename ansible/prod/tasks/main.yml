@@ -87,7 +87,7 @@
     line: "{{ item }}"
     insertbefore: EOF
   with_items:
-    - 'CATALINA_OPTS="-javaagent:/tmp/jmx_prometheus_javaagent-0.16.1.jar"'
+    - "\n"
 
 - name: Modify catalina.sh to add the following
   lineinfile:
