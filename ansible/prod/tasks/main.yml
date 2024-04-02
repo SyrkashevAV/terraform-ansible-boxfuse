@@ -57,6 +57,22 @@
     src: jmx_prometheus_javaagent-0.16.1.jar
     dest: /tmp
 
+- name: Add file config.yml
+  file:
+    path: /var/lib/docker/volumes/vol_tmp/_data/config.yml
+    state: touch
+
+- name: Modify config.yml to add the following
+  lineinfile:
+    dest: /var/lib/docker/volumes/vol_tmp/_data/config.yml
+    line: "{{ item }}"
+    insertbefore: EOF
+  with_items:
+    - 'startDelaySeconds: 0'
+    - 'ssl: false'
+    - 'lowercaseOutputName: false'
+    - 'lowercaseOutputLabelNames: false'
+
 - name: Add file setenv.sh
   file:
     path: /var/lib/docker/volumes/web_data/_data/setenv.sh
@@ -71,7 +87,6 @@
     line: "{{ item }}"
     insertbefore: EOF
   with_items:
-    - 'CATALINA_OPTS="-javaagent:/tmp/jmx_prometheus_javaagent-0.16.1.jar=8088:/tmp/config.yml" '
     - "\n"
 
 - name: Modify catalina.sh to add the following
