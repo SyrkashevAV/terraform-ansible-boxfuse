@@ -24,10 +24,6 @@
   community.docker.docker_volume:
     name: vol
 
-- name: Create a volume vol_tmp for config.yml
-  community.docker.docker_volume:
-    name: vol_tmp
-
 - name: Start a conteiner build
   community.docker.docker_container:
     name: build
@@ -45,45 +41,7 @@
       - volume:/usr/local/tomcat/webapps
       - web_data:/usr/local/tomcat/bin
       - vol:/etc/systemd/system
-      - vol_tmp:/tmp
     ports: 8081:8080
-
-- name: add JMX Prometheus JavaAgent
-  copy:
-    src: jmx_prometheus_javaagent-0.16.1.jar
-    dest: /tmp
-
-- name: Add file setenv.sh
-  file:
-    path: /var/lib/docker/volumes/web_data/_data/setenv.sh
-    state: touch
-    owner: root
-    group: root
-    mode: '0755'
-
-- name: Modify setenv.sh to add the following
-  lineinfile:
-    dest: /var/lib/docker/volumes/web_data/_data/setenv.sh
-    line: "{{ item }}"
-    insertbefore: EOF
-  with_items:
-    - 'CATALINA_OPTS="-javaagent:/tmp/jmx_prometheus_javaagent-0.16.1.jar=8088:/tmp/config.yml" '
-
-- name: Add file config.yml
-  file:
-    path: /var/lib/docker/volumes/vol_tmp/_data/config.yml
-    state: touch
-
-- name: Modify config.yml to add the following
-  lineinfile:
-    dest: /var/lib/docker/volumes/vol_tmp/_data/config.yml
-    line: "{{ item }}"
-    insertbefore: EOF
-  with_items:
-    - 'startDelaySeconds: 0'
-    - 'ssl: false'
-    - 'lowercaseOutputName: false'
-    - 'lowercaseOutputLabelNames: false'
 
 - name: Modify catalina.sh to add the following
   lineinfile:
@@ -147,12 +105,13 @@
       Type=forking
       User=tomcat
       Group=tomcat
-      Environment="JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
-      Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom"
-      Environment="CATALINA_BASE={{ path_tomcat }}"
-      Environment="CATALINA_HOME={{ path_tomcat }}"
-      Environment="CATALINA_PID={{ path_tomcat }}/temp/tomcat.pid"
-      Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+      Environment=JAVA_HOME=/usr/lib/jvm/jre
+      Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom -Djava.rmi.server.hostname={{ ansible_ssh_host }} -Dcom.sun.management.jmxremote.rmi.port=12345 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=12345 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.registry.ssl=false'
+      Environment=CATALINA_BASE={{ path_tomcat }}
+      Environment=CATALINA_HOME={{ path_tomcat }}
+      Environment=CATALINA_PID={{ path_tomcat }}/temp/tomcat.pid
+      Environment='CATALINA_OPTS=-Xms512M -Xmx3072M -Xss2M -server -XX:+UseParallelGC'
+
       ExecStart={{ path_tomcat }}/bin/startup.sh
       ExecStop={{ path_tomcat }}/bin/shutdown.sh
 
@@ -169,7 +128,6 @@
       - volume:/usr/local/tomcat/webapps
       - web_data:/usr/local/tomcat/bin
       - vol:/etc/systemd/system
-      - vol_tmp:/tmp
     ports:
       - "8081:8080"
       - "8088:8088"
