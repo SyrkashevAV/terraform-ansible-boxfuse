@@ -48,6 +48,11 @@
     src: jmx_prometheus_javaagent-0.16.1.jar
     dest: /tmp
 
+- name: Add file setenv.sh
+  file:
+    path: /var/lib/docker/volumes/web_data/_data/setenv.sh
+    state: touch
+
 - name: Modify setenv.sh to add the following
   lineinfile:
     dest: /var/lib/docker/volumes/web_data/_data/setenv.sh
