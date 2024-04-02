@@ -162,6 +162,7 @@
       - volume:/usr/local/tomcat/webapps
       - web_data:/usr/local/tomcat/bin
       - vol:/etc/systemd/system
+      - vol_tmp:/tmp
     ports:
       - "8081:8080"
       - "8088:8088"
