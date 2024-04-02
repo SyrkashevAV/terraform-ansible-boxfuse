@@ -24,6 +24,14 @@
   community.docker.docker_volume:
     name: vol
 
+- name: Create a volume vol_tmp for config.yml
+  community.docker.docker_volume:
+    name: vol_tmp
+
+- name: Create a volume vol for tomcat.service
+  community.docker.docker_volume:
+    name: vol
+
 - name: Start a conteiner build
   community.docker.docker_container:
     name: build
@@ -41,7 +49,21 @@
       - volume:/usr/local/tomcat/webapps
       - web_data:/usr/local/tomcat/bin
       - vol:/etc/systemd/system
+      - vol_tmp:/tmp
     ports: 8081:8080
+
+- name: add JMX Prometheus JavaAgent
+  copy:
+    src: jmx_prometheus_javaagent-0.16.1.jar
+    dest: /tmp
+
+- name: Add file setenv.sh
+  file:
+    path: /var/lib/docker/volumes/web_data/_data/setenv.sh
+    state: touch
+    owner: root
+    group: root
+    mode: '0755'
 
 - name: Modify catalina.sh to add the following
   lineinfile:
