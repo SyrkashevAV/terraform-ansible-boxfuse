@@ -59,7 +59,7 @@
 - name: Add file config.yml
   file:
     path: /tmp/config.yml
-    state:touch
+    state: touch
 
 - name: Modify config.yml to add the following
   lineinfile:
