@@ -87,7 +87,7 @@
     line: "{{ item }}"
     insertbefore: EOF
   with_items:
-    - 'CATALINA_OPTS="-javaagent:/tmp/config.yml"'
+    - "\n"
 
 - name: Modify catalina.sh to add the following
   lineinfile:
