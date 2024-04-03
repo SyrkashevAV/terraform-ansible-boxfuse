@@ -78,7 +78,7 @@
     line: "{{ item }}"
     insertbefore: EOF
   with_items:
-    - 'CATALINA_OPTS="-javaagent:/tmp/jmx_prometheus_javaagent-0.20.0.jar"'
+    - "\n"
 
 - name: Create tomcat group
   group:
