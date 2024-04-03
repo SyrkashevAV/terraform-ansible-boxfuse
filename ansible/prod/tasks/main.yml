@@ -12,27 +12,14 @@
   pip:
     name: docker
 
-- name: Create a volume volume for the artifact
+- name: Create a volume for the artifact, setenv.sh, tomcat.service, config.yml
   community.docker.docker_volume:
     name: "{{ item }}"
   with_items:
     - 'volume'
-
-- name: Create a volume web_data for catalina-jmx-remote.jar
-  community.docker.docker_volume:
-    name: web_data
-
-- name: Create a volume vol for tomcat.service
-  community.docker.docker_volume:
-    name: vol
-
-- name: Create a volume vol_tmp for config.yml
-  community.docker.docker_volume:
-    name: vol_tmp
-
-- name: Create a volume vol for tomcat.service
-  community.docker.docker_volume:
-    name: vol
+    - 'web_data'
+    - 'vol'
+    - 'vol_tmp'
 
 - name: Start a conteiner build
   community.docker.docker_container:
@@ -52,7 +39,9 @@
       - web_data:/usr/local/tomcat/bin
       - vol:/etc/systemd/system
       - vol_tmp:/tmp
-    ports: 8081:8080
+    ports:
+      - "8081:8080"
+      - "8088:8088"
 
 - name: add JMX Prometheus JavaAgent
   copy:
